@@ -1,7 +1,4 @@
-import java.awt.*;
 import java.io.*;
-import javax.print.attribute.standard.Media;
-import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -9,7 +6,7 @@ import javax.servlet.http.*;
 public class HelloWorldServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String name = request.getParameter("name");
 
@@ -18,30 +15,14 @@ public class HelloWorldServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
 
-        if (name != null){
+        if (name != null) {
             try {
-                out.println("<h1>Hello, "+ name +"!</h1>");
+                out.println("<h1>Hello, " + name + "!</h1>");
             } catch (Exception e) {
                 response.resetBuffer();
-                out.println("<h1>Hello, World!</h1>");
             }
-        }else{
+        } else {
             out.println("<h1>Hello, World!</h1>");
         }
-
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/banner");
-        if (dispatcher != null)
-            dispatcher.include(request, response);
-
-
-
-
     }
-
-    @Override
-    public void destroy() {
-        getServletContext().log("destroy() called");
-    }
-
 }
