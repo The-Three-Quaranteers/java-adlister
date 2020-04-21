@@ -19,6 +19,7 @@
 <head>
     <title>Login</title>
     <%@include file="partials/css.jsp"%>
+
 </head>
 <body>
 <%@include file="partials/navbar.jsp"%>
