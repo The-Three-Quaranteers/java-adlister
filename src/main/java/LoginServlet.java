@@ -17,6 +17,7 @@ public class LoginServlet extends HttpServlet {
         boolean validAttempt = username.equals("admin") && password.equals("password");
 
         if (validAttempt) {
+            request.getSession().setAttribute("user",username);
             request.getRequestDispatcher("/profile.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login");
