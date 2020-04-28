@@ -12,21 +12,11 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        boolean loggedIn;
-        HttpSession session = request.getSession(false);
-
-        try {
-
-            loggedIn = session.getAttribute("user") != null;
-
-            if (loggedIn) {
-                session.removeAttribute("user");
-                session.invalidate();
-            }
-
-        } catch (NullPointerException npe) {  }
-
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+//        session.invalidate();
         response.sendRedirect("/login");
+
     }
 
 }

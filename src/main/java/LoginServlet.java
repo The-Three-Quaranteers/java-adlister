@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         if (validAttempt) {
             HttpSession session = request.getSession();
             session.setAttribute("user",username);
-            request.getRequestDispatcher("/profile.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login");
         }
