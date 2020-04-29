@@ -1,9 +1,13 @@
+package models;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactListDao implements Contacts{
+public class ContactsListDao implements Contacts{
     //we need a list variable to hold all the contacts
     private List<Contact> contacts = new ArrayList<>();
+
+
 
     // get a list of all the contacts
     @Override
@@ -40,7 +44,7 @@ public class ContactListDao implements Contacts{
 
 
     public static void main(String[] args) {
-        Contacts contactDao = new ContactListDao();
+        Contacts contactDao = new ContactsListDao();
 
         //test the getContacts method
         System.out.println("\n=== Testing getContacts()");

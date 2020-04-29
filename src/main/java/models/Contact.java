@@ -1,3 +1,5 @@
+package models;
+
 public class Contact {
     public long id;
     public String firstName;

@@ -1,3 +1,5 @@
+package models;
+
 import java.util.List;
 
 //Interface for our contact bean (to be implemented by our DAO)
@@ -16,5 +18,5 @@ public interface Contacts {
     Contact getContactById(long id);
 
 //    // insert a new contact and returns the new ad's id
-//    Long insert(Contact contact);
+//    Long insert(models.Contact contact);
 }

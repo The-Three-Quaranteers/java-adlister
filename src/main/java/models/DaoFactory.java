@@ -1,3 +1,5 @@
+package models;
+
 public class DaoFactory {
     private static Ads adsDao;
     private static Contacts contactsDao;
@@ -11,7 +13,7 @@ public class DaoFactory {
 
     public static Contacts getContactsDao(){
         if (contactsDao == null) {
-            contactsDao = new ContactListDao();
+            contactsDao = new ContactsListDao();
         }
         return contactsDao;
     }
