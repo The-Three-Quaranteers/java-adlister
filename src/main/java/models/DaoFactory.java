@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.SQLException;
+
 public class DaoFactory {
     private static Ads adsDao;
     private static Contacts contactsDao;
@@ -11,9 +13,9 @@ public class DaoFactory {
         return adsDao;
     }
 
-    public static Contacts getContactsDao(){
+    public static Contacts getContactsDao() throws SQLException {
         if (contactsDao == null) {
-            contactsDao = new ContactsListDao();
+            contactsDao = new MySQLContactDao();
         }
         return contactsDao;
     }
