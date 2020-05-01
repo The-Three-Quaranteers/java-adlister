@@ -50,15 +50,17 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public Long insert(User user) {
+        long output = -1;
         try {
             PreparedStatement stmt = createInsertQuery(user);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return rs.getLong(1);
+            output =  rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new user.", e);
         }
+        return output;
     }
 
     private PreparedStatement createInsertQuery(User user) {
