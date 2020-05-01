@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.codeup.adlister.util.Password.check;
+import static com.codeup.adlister.util.Password.hash;
+
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,6 +26,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String hashWord;
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
         if (user == null) {
@@ -30,7 +34,9 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        boolean validAttempt = password.equals(user.getPassword());
+        hashWord = hash(user.getPassword());
+
+        boolean validAttempt = check(password,hashWord); //password.equals(user.getPassword());
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
