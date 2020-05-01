@@ -53,18 +53,18 @@ public class MySQLAdsDao implements Ads {
     }
 
     private PreparedStatement createInsertQuery(Ad ad) {
+        PreparedStatement stmt = null;
         try {
-
             String sql = "INSERT INTO ads(user_id, title, description) VALUES (?,?,?)";
-            PreparedStatement stmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
-            return stmt;
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("There was an error!");
         }
+        return stmt;
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
