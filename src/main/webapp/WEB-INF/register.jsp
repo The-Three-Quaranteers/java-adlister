@@ -25,6 +25,8 @@
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
                 <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                <p> </p>
+                <jsp:include page="partials/messages.jsp"/>
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>

@@ -31,9 +31,26 @@ public class MySQLUsersDao implements Users {
             stmt.setString(1, username);
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding a user by username", e);
+            // System.out.println("error finding that user by username");
+            return null;
+            // throw new RuntimeException("Error finding a user by username", e);
         }
     }
+
+    @Override
+    public User findByEmail(String email) {
+        String query = "SELECT * FROM users WHERE email = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, email);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            // System.out.println("error finding that user by email");
+            return null;
+            // throw new RuntimeException("Error finding a user by email", e);
+        }
+    }
+
 
     @Override
     public Long insert(User user) {
