@@ -18,6 +18,7 @@
                 <label for="password">Password</label>
                 <input id="password" name="password" class="form-control" type="password">
             </div>
+            <jsp:include page="partials/messages.jsp"/>
             <input type="submit" class="btn btn-primary btn-block" value="Log In">
         </form>
     </div>

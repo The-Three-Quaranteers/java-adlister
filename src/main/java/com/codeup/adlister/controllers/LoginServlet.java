@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Message;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Password;
 
@@ -24,7 +25,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        Message errMsg = new Message();
+        String errStr = "";
+        errMsg.setDescription("");
         User user = DaoFactory.getUsersDao().findByUsername(username);
+
+        // validate input
+        boolean inputHasErrors = username.isEmpty()
+                || password.isEmpty();
+
+        if (inputHasErrors) {
+            if (username.isEmpty()){
+                errStr+= "* Username Required! ";
+            }
+            if (password.isEmpty()){
+                errStr+= "* Password Required! ";
+            }
+            errMsg.setDescription(errStr);
+            request.getSession().setAttribute("message",errMsg);
+            response.sendRedirect("/login");
+            return;
+        }
 
         if (user == null) {
             response.sendRedirect("/login");
@@ -32,6 +53,12 @@ public class LoginServlet extends HttpServlet {
         }
 
         boolean validAttempt = Password.check(password, user.getPassword());
+
+        if (!validAttempt) {
+            errStr+= "* Incorrect username or password *";
+            errMsg.setDescription(errStr);
+            request.getSession().setAttribute("message",errMsg);
+        }
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
