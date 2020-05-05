@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Message;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,32 @@ public class CreateAdServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Message errMsg = new Message(); //instantiate the message obj.
+        String title = request.getParameter("title"); // get parameter for title from the post after submission
+        String description = request.getParameter("description"); // get parameters for description from the post after submission
+        String errStr = "";
+        // validate input
+        boolean inputHasErrors = title.isEmpty()
+                || description.isEmpty();
+
+
+        if (inputHasErrors) {
+            if (title.isEmpty()){
+                errStr+= "* Title Required! ";
+            }
+            if (description.isEmpty()){
+                errStr+= "* Description Required! ";
+            }
+
+            errMsg.setDescription(errStr);
+
+            request.getSession().setAttribute("message",errMsg);
+
+            response.sendRedirect("/ads/create");
+            return;
+        }
+
+
         User user = (User) request.getSession().getAttribute("user");
         Ad ad = new Ad(
             user.getId(),
