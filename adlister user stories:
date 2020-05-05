@@ -1,0 +1,36 @@
+user stories:
+
+** 1. show ad page
+	-make available to unregistered or not logged in users.
+	-should be specific to 1 ad.
+	-referenced from the index pg.
+	-pass id of ad as para of getRequest.
+
+** 2. search funtion:
+	-search by user
+	-search by title
+	-search by description (keyword)
+
+*** 3. Show user's ads from profile pg
+
+*** 4. unique usernames
+	-change db table to reflect "unique" username
+
+*** 5. code cleanup
+
+* 6. dynamic navbar
+
+** 7. update and delete ad
+
+*** 8. allow user to update profile
+
+** 9. validate data
+
+*** 10. error msgs
+
+** 11. sticky forms
+	-code for this is relatively easy to find with a google search.
+
+* 12. multiple categories for ads
+
+* 13. intended redirects

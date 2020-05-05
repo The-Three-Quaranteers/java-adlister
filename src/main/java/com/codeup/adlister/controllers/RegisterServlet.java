@@ -60,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
 
             response.sendRedirect("/register");
             return;
-        }  else
+        } else
         if (DaoFactory.getUsersDao().findByEmail(email) != null) {
             errMsg.setDescription("* Email already used! *");
             request.getSession().setAttribute("message",errMsg);
@@ -68,11 +68,6 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/register");
             return;
         }
-        // create new user
-//
-//        if (DaoFactory.getUsersDao().findByUsername(username) != null) {
-//            errMsg.setDescription("* Username Already Exists *");
-//        }
 
         //create and save a new user
         User user = new User(username, email, password);
