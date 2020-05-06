@@ -50,7 +50,8 @@ public class RegisterServlet extends HttpServlet {
             errMsg.setDescription(errStr);
 
             request.getSession().setAttribute("message",errMsg);
-
+            request.getSession().setAttribute("username",username);
+            request.getSession().setAttribute("email",email);
             response.sendRedirect("/register");
             return;
         } else

@@ -44,7 +44,8 @@ public class CreateAdServlet extends HttpServlet {
             errMsg.setDescription(errStr);
 
             request.getSession().setAttribute("message",errMsg);
-
+            request.getSession().setAttribute("title",title);
+            request.getSession().setAttribute("description",description);
             response.sendRedirect("/ads/create");
             return;
         }
