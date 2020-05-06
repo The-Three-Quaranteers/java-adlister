@@ -14,4 +14,6 @@ public interface Ads {
     List<Ad> usersAds(User user);
     // get a specific ad by ad_id
     Ad getAdByID(long ad_id);
+    //updates an ad in the db
+    void updateAd(Ad ad);
 }

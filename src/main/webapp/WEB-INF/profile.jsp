@@ -19,7 +19,7 @@
             <h2>${ad.title}</h2>
             <p>${ad.description}</p>
 
-            <form action="${pageContext.request.contextPath}/ads/update" method="POST">
+            <form action="${pageContext.request.contextPath}/profile" method="POST">
                 <input name="ad_id" type="hidden" value=${ad.id}>
                 <input type="submit" value="EDIT">
             </form>

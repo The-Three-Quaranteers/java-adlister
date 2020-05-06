@@ -53,18 +53,26 @@ public class UpdateAdServlet extends HttpServlet {
             request.getSession().setAttribute("title",title);
             request.getSession().setAttribute("description",description);
             response.sendRedirect("/ads/update");
-            return;
         }
 
+        System.out.println(title);
+        System.out.println(description);
 
-//        User user = (User) request.getSession().getAttribute("user");
-//        Ad ad = new Ad(
-//                user.getId(),
-//                request.getParameter("title"),
-//                request.getParameter("description")
-//        );
-//        DaoFactory.getAdsDao().insert(ad);
-//        response.sendRedirect("/ads");
+        title = request.getParameter("title");
+        description = request.getParameter("description");
+
+        System.out.println(title);
+        System.out.println(description);
+
+        User user = (User) request.getSession().getAttribute("user");
+        Ad adToInsert = new Ad(
+                adToEdit.getId(),
+                user.getId(),
+                title,
+                description
+        );
+        DaoFactory.getAdsDao().updateAd(adToInsert);
+        response.sendRedirect("/profile");
     }
 }
 
