@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
             }
             errMsg.setDescription(errStr);
             request.getSession().setAttribute("message",errMsg);
+            request.getSession().setAttribute("username",username);
             response.sendRedirect("/login");
             return;
         }
@@ -54,16 +55,15 @@ public class LoginServlet extends HttpServlet {
 
         boolean validAttempt = Password.check(password, user.getPassword());
 
-        if (!validAttempt) {
+        if (validAttempt) {
+            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("id", user.getId());
+            response.sendRedirect("/profile");
+        } else {
             errStr+= "* Incorrect username or password *";
             errMsg.setDescription(errStr);
             request.getSession().setAttribute("message",errMsg);
-        }
-
-        if (validAttempt) {
-            request.getSession().setAttribute("user", user);
-            response.sendRedirect("/profile");
-        } else {
+            request.getSession().setAttribute("username",username);
             response.sendRedirect("/login");
         }
     }

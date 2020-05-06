@@ -12,22 +12,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
-public class CreateAdServlet extends HttpServlet {
+@WebServlet(name = "controllers.UpdateAdServlet", urlPatterns = "/ads/update")
+public class UpdateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
             response.sendRedirect("/login");
             return;
         }
-        request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
-            .forward(request, response);
+        if (request.getSession().getAttribute("ad") != null) {
+            Ad adToEdit = (Ad) request.getSession().getAttribute("ad");
+        }
+        System.out.println(request);
+        request.getRequestDispatcher("/WEB-INF/ads/update.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Message errMsg = new Message(); //instantiate the message obj.
-        String title = request.getParameter("title"); // get parameter for title from the post after submission
-        String description = request.getParameter("description"); // get parameters for description from the post after submission
+        long ad_id = Long.parseLong(request.getParameter("ad_id"));
         String errStr = "";
+        Ad adToEdit = DaoFactory.getAdsDao().getAdByID(ad_id);
+        String title = adToEdit.getTitle();
+        String description = adToEdit.getDescription();
+
         // validate input
         boolean inputHasErrors = title.isEmpty()
                 || description.isEmpty();
@@ -46,18 +52,27 @@ public class CreateAdServlet extends HttpServlet {
             request.getSession().setAttribute("message",errMsg);
             request.getSession().setAttribute("title",title);
             request.getSession().setAttribute("description",description);
-            response.sendRedirect("/ads/create");
-            return;
+            response.sendRedirect("/ads/update");
         }
 
+        System.out.println(title);
+        System.out.println(description);
+
+        title = request.getParameter("title");
+        description = request.getParameter("description");
+
+        System.out.println(title);
+        System.out.println(description);
 
         User user = (User) request.getSession().getAttribute("user");
-        Ad ad = new Ad(
-            user.getId(),
-            request.getParameter("title"),
-            request.getParameter("description")
+        Ad adToInsert = new Ad(
+                adToEdit.getId(),
+                user.getId(),
+                title,
+                description
         );
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
+        DaoFactory.getAdsDao().updateAd(adToInsert);
+        response.sendRedirect("/profile");
     }
 }
+
