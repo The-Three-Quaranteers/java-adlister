@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("id", user.getId());
             response.sendRedirect("/profile");
         } else {
             errStr+= "* Incorrect username or password *";
