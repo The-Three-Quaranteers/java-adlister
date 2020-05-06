@@ -18,8 +18,8 @@
         <div class="col-md-6">
             <h3>${ad.title}</h3>
             <p>${ad.description}</p>
+            <hr>
         </div>
-        <hr>
     </c:forEach>
 </div>
 
