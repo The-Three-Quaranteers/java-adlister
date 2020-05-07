@@ -12,11 +12,11 @@
     <form action="/update_user" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.username}">
+            <input id="username" name="username" class="form-control" type="text" value="${sessionScope.user.username}">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" class="form-control" type="text" value="${sessionScope.email}">
+            <input id="email" name="email" class="form-control" type="text" value="${sessionScope.user.email}">
         </div>
         <div class="form-group">
             <label for="password">Password</label>

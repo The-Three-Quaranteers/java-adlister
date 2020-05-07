@@ -24,7 +24,7 @@
                     <li class="nav-item"><a href="/ads/create">Create new ad</a></li>
                     <li class="nav-item"><a href="/profile">My ads</a></li>
                     <li class="nav-item"><a href="/logout">Logout</a></li>
-                    <li class="nav-item"><a href="/update_user">Profile Settings</a></li>
+                    <li style="font-size:2em" class="nav-item" value="Update Profile"><a href="/update_user">&#9881;</a></li>
 
                 </c:otherwise>
             </c:choose>

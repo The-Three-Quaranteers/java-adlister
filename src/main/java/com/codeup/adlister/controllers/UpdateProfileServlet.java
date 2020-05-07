@@ -62,21 +62,22 @@ public class UpdateProfileServlet extends HttpServlet {
             response.sendRedirect("/update_user");
             return;
         }else
-        if (DaoFactory.getUsersDao().findByUsername(username) != null) {
+        if (DaoFactory.getUsersDao().findByUsername(username) != null && !sessUser.getUsername().equals(DaoFactory.getUsersDao().findByUsername(username).getUsername())) {
             errMsg.setDescription("* Username already used! *");
             request.getSession().setAttribute("message",errMsg);
 
             response.sendRedirect("/register");
             return;
         } else
-        if (DaoFactory.getUsersDao().findByEmail(email) != null) {
+        if (DaoFactory.getUsersDao().findByEmail(email) != null && !sessUser.getEmail().equals(DaoFactory.getUsersDao().findByUsername(username).getEmail())) {
             errMsg.setDescription("* Email already used! *");
             request.getSession().setAttribute("message",errMsg);
 
             response.sendRedirect("/register");
             return;
         }
-        User user = new User(id, username, email, password);
+        User user = new User(username, email, password);
+        user.setId(id);
         DaoFactory.getUsersDao().updateUserInfo(user);
         errStr = "";
         errMsg.setDescription(errStr);
