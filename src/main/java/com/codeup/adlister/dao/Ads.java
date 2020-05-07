@@ -18,10 +18,6 @@ public interface Ads {
     List<Ad> getAdByTitle(String title);
     //updates an ad in the db
     void updateAd(Ad ad);
-
-    //search ads
-//    List<Ad> searchedAds(String s, String c);
-
     //remove an ad from the db
     void deleteAd(Ad ad);
 
