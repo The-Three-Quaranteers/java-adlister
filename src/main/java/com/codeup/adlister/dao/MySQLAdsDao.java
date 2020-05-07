@@ -142,4 +142,5 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
 }
