@@ -29,6 +29,21 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> getAdByTitle(String title) {
+        PreparedStatement stmt = null;
+        String searchWithWildcard =  "%" + title + "%";
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE title LIKE ?");
+            stmt.setString(1, searchWithWildcard);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e){
+            System.out.println("Ad not found!");
+            throw new RuntimeException("Error retrieving all user ads.", e);
+        }
+    }
+
+    @Override
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
@@ -76,10 +91,21 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
             stmt.setLong(3, ad.getId());
-            int holder = stmt.executeUpdate();
-            System.out.println(holder);
+            stmt.executeUpdate();
         } catch (SQLException e){
             throw new RuntimeException("Error retrieving all user ads.", e);
+        }
+    }
+
+    @Override
+    public void deleteAd(Ad ad) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("DELETE FROM ads WHERE id = ?");
+            stmt.setLong(1,ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad.", e);
         }
     }
 
