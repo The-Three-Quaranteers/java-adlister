@@ -16,4 +16,7 @@ public interface Ads {
     Ad getAdByID(long ad_id);
     //updates an ad in the db
     void updateAd(Ad ad);
+
+    //search ads
+//    List<Ad> searchedAds(String s, String c);
 }
