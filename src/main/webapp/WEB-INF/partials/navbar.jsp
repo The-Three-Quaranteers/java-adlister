@@ -5,22 +5,29 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/ads">Adlister</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
 
+        <ul class="nav navbar-nav navbar-right align-item-center">
+            <li class="nav-item">
+                <form class="navbar-form" action="/ads/search" method="get">
+                    <label for="search">Search:</label>
+                    <input id="search" name="search" class="form-control" type="text" placeholder="Ad Title">
+<%--                    <button type="submit" class="btn btn-sm">Search</button>--%>
+                </form>
+            </li>
             <c:choose>
                 <c:when test="${user == null}">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
+                    <li class="nav-item"><a href="/login">Login</a></li>
+                    <li class="nav-item"><a href="/register">Register</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/logout">Logout</a></li>
+                    <li class="nav-item"><a href="/ads">View all ads</a></li>
+                    <li class="nav-item"><a href="/ads/create">Create new ad</a></li>
+                    <li class="nav-item"><a href="/profile">My ads</a></li>
+                    <li class="nav-item"><a href="/logout">Logout</a></li>
                 </c:otherwise>
             </c:choose>
-<%--            --%>
-<%--            <li><a href="/login">Login</a></li>--%>
-<%--            <li><a href="/register">Register</a></li>--%>
-<%--            <li><a href="/logout">Logout</a></li>--%>
         </ul>
-    </div><!-- /.navbar-collapse -->
+<%--    </div><!-- /.navbar-collapse -->--%>
     </div><!-- /.container-fluid -->
 </nav>
+

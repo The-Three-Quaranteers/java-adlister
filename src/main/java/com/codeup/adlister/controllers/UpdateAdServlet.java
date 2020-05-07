@@ -22,7 +22,6 @@ public class UpdateAdServlet extends HttpServlet {
         if (request.getSession().getAttribute("ad") != null) {
             Ad adToEdit = (Ad) request.getSession().getAttribute("ad");
         }
-        System.out.println(request);
         request.getRequestDispatcher("/WEB-INF/ads/update.jsp").forward(request, response);
     }
 
@@ -55,14 +54,8 @@ public class UpdateAdServlet extends HttpServlet {
             response.sendRedirect("/ads/update");
         }
 
-        System.out.println(title);
-        System.out.println(description);
-
         title = request.getParameter("title");
         description = request.getParameter("description");
-
-        System.out.println(title);
-        System.out.println(description);
 
         User user = (User) request.getSession().getAttribute("user");
         Ad adToInsert = new Ad(
@@ -72,6 +65,9 @@ public class UpdateAdServlet extends HttpServlet {
                 description
         );
         DaoFactory.getAdsDao().updateAd(adToInsert);
+        errStr = "";
+        errMsg.setDescription(errStr);
+        request.getSession().setAttribute("message",errMsg);
         response.sendRedirect("/profile");
     }
 }
