@@ -14,6 +14,10 @@ public interface Ads {
     List<Ad> usersAds(User user);
     // get a specific ad by ad_id
     Ad getAdByID(long ad_id);
+    // get a specific ad by title
+    List<Ad> getAdByTitle(String title);
     //updates an ad in the db
     void updateAd(Ad ad);
+    //remove an ad from the db
+    void deleteAd(Ad ad);
 }

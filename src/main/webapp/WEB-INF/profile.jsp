@@ -23,6 +23,10 @@
                 <input name="ad_id" type="hidden" value=${ad.id}>
                 <input type="submit" value="EDIT">
             </form>
+            <form action="${pageContext.request.contextPath}/ads/delete" method="get">
+                <input name="ad_id" type="hidden" value=${ad.id}>
+                <input type="submit" value="DELETE">
+            </form>
             <p>${ad.id}</p>
 
         </div>
