@@ -20,4 +20,5 @@ public interface Ads {
     void updateAd(Ad ad);
     //remove an ad from the db
     void deleteAd(Ad ad);
+
 }

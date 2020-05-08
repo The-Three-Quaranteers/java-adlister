@@ -23,6 +23,11 @@ user stories:
 ** 7. update and delete ad
 
 *** 8. allow user to update profile
+    --Model is handled by User bean
+    --Interface - new method updateUserInfo created
+    --Implementation handled in the MySQLUsersDao
+    --Viewer - created updateUserInfo.jsp
+    --Controller -
 
 ** 9. validate data
 
@@ -34,3 +39,5 @@ user stories:
 * 12. multiple categories for ads
 
 * 13. intended redirects
+
+
