@@ -69,7 +69,7 @@ public class UpdateProfileServlet extends HttpServlet {
             response.sendRedirect("/register");
             return;
         } else
-        if (DaoFactory.getUsersDao().findByEmail(email) != null && !sessUser.getEmail().equals(DaoFactory.getUsersDao().findByUsername(username).getEmail())) {
+        if (DaoFactory.getUsersDao().findByEmail(email) != null && !sessUser.getEmail().equals(DaoFactory.getUsersDao().findByEmail(email).getEmail())) {
             errMsg.setDescription("* Email already used! *");
             request.getSession().setAttribute("message",errMsg);
 
